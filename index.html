@@ -107,9 +107,70 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
     
 <header>
-    <img src="image/logo.png" alt="Logo" class="logo" loading="lazy">
-    <h1 class="no-break">邱佳明先生 訃告</h1>
+  <img src="image/logo.png" alt="Logo" class="logo" loading="lazy">
+  <h1 class="no-break">邱佳明先生 訃告</h1>
 </header>
+
+<style>
+  /* 🕊️ 頁首整體 */
+  header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+    background-color: #fff;
+  }
+
+  /* 🌸 Logo 圖示 */
+  .logo {
+    max-width: 120px;
+    width: 20vw;
+    height: auto;
+    margin-bottom: 1rem;
+    object-fit: contain;
+  }
+
+  /* 🕯️ 標題字樣 */
+  h1.no-break {
+    font-family: "ChenYu", "Noto Serif TC", "Songti TC", "Times New Roman", serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    color: #333;
+    letter-spacing: 0.15em;
+    line-height: 1.3;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  /* 📱 手機優化 */
+  @media (max-width: 600px) {
+    header {
+      padding: 1.5rem 1rem;
+    }
+    .logo {
+      max-width: 90px;
+      width: 30vw;
+    }
+    h1.no-break {
+      font-size: clamp(1.4rem, 5vw, 2.2rem);
+      letter-spacing: 0.12em;
+    }
+  }
+
+  /* 💻 大螢幕優化 */
+  @media (min-width: 1200px) {
+    header {
+      padding: 2.5rem 0;
+    }
+    .logo {
+      max-width: 150px;
+    }
+    h1.no-break {
+      font-size: 2.8rem;
+    }
+  }
+</style>
 
 <main>
     <section class="main-photo-section">
@@ -153,16 +214,7 @@ document.addEventListener('DOMContentLoaded', function () {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 頁首樣式 */
-header {
-    text-align: center;
-    margin-top: 20px;
-}
-header .logo {
-    width: 80px;
-    height: auto;
-    opacity: 0.85;
-}
+
 h1.no-break {
     white-space: nowrap;
     font-size: 30px;
