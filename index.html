@@ -115,55 +115,117 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 <main>
-    <section class="main-photo-section">
-        <img id="main-photo" src="image/IMG_9336.jpeg" alt="追思照片" loading="lazy">
+  <section class="main-photo-section">
+    <img id="main-photo" src="image/IMG_9336.jpeg" alt="追思照片" loading="lazy">
 
-        <div id="life-story">
-            <p class="fade-in-text" style="--delay:0s;"><strong>我們摯愛的親人 邱佳明先生</strong></p>
+    <div id="life-story">
+      <p class="fade-in-text" style="--delay:0s;"><strong>我們摯愛的親人 邱佳明先生</strong></p>
 
-            <p class="fade-in-text" style="--delay:0.3s;"><strong>於民國114年10月16日<br>
-               走完49年的人生旅程，<br>
-               留下我們永恆的追思與感恩。</strong></p>
+      <p class="fade-in-text" style="--delay:0.3s;"><strong>於民國114年10月16日<br>
+         走完49年的人生旅程，<br>
+         留下我們永恆的追思與感恩。</strong></p>
 
-            <p class="fade-in-text" style="--delay:0.6s;"><strong>謹擇於<br>
-               民國114年10月28日（星期二）<br>
-               板橋殯儀館［ 安詳廳 ］<br>
-               舉辦告別追思奠禮</strong></p>
+      <p class="fade-in-text" style="--delay:0.6s;"><strong>謹擇於<br>
+         民國114年10月28日（星期二）<br>
+         板橋殯儀館［ 安詳廳 ］<br>
+         舉辦告別追思奠禮</strong></p>
 
-            <p class="fade-in-text" style="--delay:0.9s;"><strong>敬邀至親好友蒞臨獻上哀思<br>
-               並向您獻上最深的敬意。</strong></p>
+      <p class="fade-in-text" style="--delay:0.9s;"><strong>敬邀至親好友蒞臨獻上哀思<br>
+         並向您獻上最深的敬意。</strong></p>
 
-            <p class="fade-in-text" style="--delay:1.2s;"><strong>感謝您的關懷與陪伴<br>
-               家人們銘記在心，衷心感謝。</strong></p>
+      <p class="fade-in-text" style="--delay:1.2s;"><strong>感謝您的關懷與陪伴<br>
+         家人們銘記在心，衷心感謝。</strong></p>
 
-            <p class="fade-in-text" style="--delay:1.5s;"><strong>豎靈地點：板橋龍華會館<br>
-               地址：新北市板橋區長江路一段7號</strong></p>
+      <p class="fade-in-text" style="--delay:1.5s;"><strong>豎靈地點：板橋龍華會館<br>
+         地址：新北市板橋區長江路一段7號</strong></p>
 
-            <p class="fade-in-text" style="--delay:1.8s;"><strong>出殯地點：新北市板橋殯儀館<br>
-               地址：新北市板橋區中正路560號</strong></p>
-        </div>
-    </section>
+      <p class="fade-in-text" style="--delay:1.8s;"><strong>出殯地點：新北市板橋殯儀館<br>
+         地址：新北市板橋區中正路560號</strong></p>
+    </div>
+  </section>
 
-<!-- 📜 訃告紙本區 -->
-<section class="paper-obituary-section fade-in-text" style="text-align:center;">
-  <h2><strong>訃告正本</strong></h2>
-  <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy"
-       style="cursor:pointer; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); max-width:90%; height:auto;">
-</section>
+  <!-- 📜 訃告紙本區 -->
+  <section class="paper-obituary-section fade-in-text" style="text-align:center;">
+    <h2><strong>訃告正本</strong></h2>
+    <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy"
+         style="cursor:pointer; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); max-width:90%; height:auto;">
+  </section>
 
-<!-- 🔍 放大預覽容器 -->
-<div id="zoom-container">
-  <img id="zoom-img" src="" alt="放大檢視">
-</div>
+  <!-- 🔍 放大預覽容器 -->
+  <div id="zoom-container">
+    <img id="zoom-img" src="" alt="放大檢視">
+  </div>
+</main>
 
 <style>
-/* 字型 */
+/* 字型設定 */
 @font-face {
   font-family: 'Iansui';
   src: url('Iansui-Regular.ttf') format('truetype');
 }
 
-/* 淡入效果 */
+/* 主照片與生命故事整體配置 */
+.main-photo-section {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#main-photo {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  max-height: 80vh;
+  object-fit: cover;
+}
+
+/* 📜 Life-story 區塊設定 */
+#life-story {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* 垂直置中 */
+  align-items: center;       /* 水平置中 */
+  text-align: center;
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+  max-width: 90vw;
+  margin: 2em auto 0 auto;
+  line-height: 1.6;
+  word-break: keep-all;
+  white-space: normal;
+  overflow-wrap: break-word;
+  font-size: clamp(16px, 2.2vw, 24px);
+}
+
+/* 段落穩定換行與間距 */
+#life-story p {
+  display: inline-block;
+  width: 100%;
+  margin: 0.8em 0;
+  white-space: pre-line; /* 保留 <br> */
+}
+
+/* 不同裝置自動調整 */
+@media (max-width: 768px) {
+  #life-story {
+    font-size: clamp(15px, 2.8vw, 20px);
+    line-height: 1.7;
+  }
+}
+
+@media (max-width: 480px) {
+  #life-story {
+    font-size: clamp(14px, 3.5vw, 18px);
+    line-height: 1.8;
+    margin-top: 1.5em;
+  }
+}
+
+/* ✨ 淡入效果 */
 .fade-in-text {
   font-family: 'Iansui', 'Noto Serif TC', serif;
   opacity: 0;
@@ -175,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function () {
   transform: translateY(0);
 }
 
-/* 🔍 放大容器樣式（無黑背景） */
+/* 🔍 放大容器樣式（模糊背景） */
 #zoom-container {
   position: fixed;
   top: 0; left: 0;
@@ -183,7 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
   display: none;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(3px) brightness(0.95); /* 模糊＋亮度微降 */
+  backdrop-filter: blur(3px) brightness(0.95);
   z-index: 9999;
 }
 
@@ -203,7 +265,7 @@ document.addEventListener('DOMContentLoaded', function () {
   opacity: 1;
 }
 
-/* 響應式 */
+/* 響應式放大圖片調整 */
 @media (max-width: 600px) {
   #zoom-img {
     max-width: 92%;
@@ -218,15 +280,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const zoomContainer = document.getElementById('zoom-container');
   const zoomImg = document.getElementById('zoom-img');
 
+  // 圖片放大功能
   if (paperImg && zoomContainer && zoomImg) {
-    // 點圖片放大
     paperImg.addEventListener('click', () => {
       zoomImg.src = paperImg.src;
       zoomContainer.style.display = 'flex';
       setTimeout(() => zoomContainer.classList.add('show'), 20);
     });
 
-    // 點外圍關閉
     zoomContainer.addEventListener('click', e => {
       if (e.target === zoomContainer) {
         zoomContainer.classList.remove('show');
@@ -234,7 +295,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    // 按 ESC 關閉
     document.addEventListener('keydown', e => {
       if (e.key === "Escape") {
         zoomContainer.classList.remove('show');
@@ -243,7 +303,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ✨ 淡入動畫
+  // 淡入動畫控制
   const fadeEls = document.querySelectorAll('.fade-in-text');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
