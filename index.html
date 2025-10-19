@@ -275,13 +275,44 @@ h1.no-break {
 }
 </style>
 
-        <!-- 訃告紙本部分 -->
-        <section class="paper-obituary-section">
-         <h2><strong>訃告正本</strong></h2>
-            <a href="image/IMG_8773.jpeg" data-lightbox="paper-obituary" data-title="訃聞紙本">
-                <img id="paper-obituary" src="image/IMG_8773.jpeg" alt="訃聞紙本" loading="lazy">
-            </a>
-        </section>
+        
+    <!-- 訃告紙本區 -->
+  <section class="paper-obituary-section">
+    <h2><strong>訃告正本</strong></h2>
+    <img id="paper-obituary" src="image/IMG_8773.jpeg" alt="訃聞紙本" loading="lazy">
+  </section>
+</main>
+
+<!-- 📜 燈箱預覽 -->
+<div id="lightbox" class="lightbox">
+  <span class="close-btn">&times;</span>
+  <img class="lightbox-content" id="lightbox-img" alt="放大預覽">
+</div>
+
+<script>
+// 📜 點擊訃告紙本顯示放大圖
+const paperImg = document.getElementById('paper-obituary');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close-btn');
+
+paperImg.addEventListener('click', () => {
+  lightbox.style.display = 'block';
+  lightboxImg.src = paperImg.src;
+});
+
+closeBtn.addEventListener('click', () => {
+  lightbox.style.display = 'none';
+});
+
+// 點背景也可關閉
+lightbox.addEventListener('click', (e) => {
+  if (e.target === lightbox) {
+    lightbox.style.display = 'none';
+  }
+});
+</script>
+</body>
 
    <!-- 追思與緬懷部分 -->
 <section id="remembrance">
