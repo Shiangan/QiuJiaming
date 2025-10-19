@@ -213,22 +213,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* 段落之間保留空間感 */
 
+/* 段落設定 */
 #life-story p {
-  margin: 0.7em 0; /* 段落間距自然 */
-}
-
-/* 段落穩定換行與間距 */
-#life-story p {
-  display: inline-block;
+  display: block;
+  white-space: pre-line;         /* 保留 <br> */
+  margin: 1.5em 0;               /* 段落間距 */
+  font-size: clamp(16px, 2vw, 22px); /* 字體隨設備縮放 */
+  line-height: 1.6;              /* 行距 */
   width: 100%;
-  margin: 0.8em 0;
-  white-space: pre-line; /* 保留 <br> */
+  word-break: break-word;        /* 長字自動換行 */
+  text-align: center;            /* 置中 */
 }
 
-    #life-story strong {
-  display: inline-block;
-  text-indent: 0;
-}
+/* 段首縮排 */
+#life-story p strong {
+  display: block;
+  text-indent: 0;                /* 置中就不縮排 */
 
 /* 不同裝置自動調整 */
 @media (max-width: 768px) {
@@ -262,7 +262,7 @@ document.addEventListener('DOMContentLoaded', function () {
 #zoom-container {
   position: fixed;
   top: 0; left: 0;
-  width: 100vw; height: 100vh;
+  width: 120vw; height: 120vh;
   display: none;
   justify-content: center;
   align-items: center;
