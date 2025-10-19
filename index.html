@@ -107,32 +107,35 @@ document.addEventListener('DOMContentLoaded', function () {
     audio.addEventListener('pause', () => localStorage.setItem('audioPlaying', 'false'));
 });
 </script>
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>邱佳明先生 訃告</title>
 
+<!-- ===== 字型 ===== -->
 <style>
-/* ===== 字型 ===== */
 @font-face {
   font-family: 'Iansui';
   src: url('Iansui-Regular.ttf') format('truetype');
 }
-body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#111; }
+body, html {
+  margin:0; padding:0; height:100%; overflow-x:hidden;
+  font-family:'Iansui', 'Noto Serif TC', serif;
+  background:#111; color:#fff;
+}
 
 /* ===== 開場燈箱 ===== */
 .intro-lightbox {
-  position: fixed;
-  z-index: 2000;
-  top:0; left:0;
-  width:100%; height:100%;
-  background: radial-gradient(circle at center, #000000 0%, #111111 100%);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  overflow: hidden;
+  position: fixed; top:0; left:0;
+  width:100%; height:100%; z-index:2000;
+  background: radial-gradient(circle at center, #000 0%, #111 100%);
+  display:flex; align-items:center; justify-content:center;
+  overflow:hidden;
 }
-
 .intro-lightbox::before {
-  content:'';
-  position:absolute;
-  width:150%; height:150%;
+  content:''; position:absolute; width:150%; height:150%;
   background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
   animation: pulse 6s ease-in-out infinite alternate;
 }
@@ -140,72 +143,41 @@ body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#11
   0% { transform: scale(1) rotate(0deg); opacity:0.4; }
   100% { transform: scale(1.1) rotate(360deg); opacity:0.6; }
 }
-
 .intro-content {
-  position: relative;
-  display:flex;
-  gap:60px;
+  position: relative; display:flex; gap:60px;
   filter: drop-shadow(0 0 30px rgba(255,255,255,0.6));
   z-index:2;
 }
 .vertical-text {
-  writing-mode: vertical-rl;
-  text-orientation: upright;
-  color:#fff;
-  font-family: 'Iansui', 'Noto Serif TC', serif;
-  font-size:50px;
-  opacity:0;
-  transform: scale(0.6);
+  writing-mode: vertical-rl; text-orientation: upright;
+  font-size:50px; color:#fff;
+  opacity:0; transform: scale(0.6);
   text-shadow: 0 0 8px rgba(255,255,255,0.8);
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
-.vertical-text.show {
-  opacity:1;
-  transform: scale(1);
-}
+.vertical-text.show { opacity:1; transform:scale(1); }
 
 /* ===== 主頁 ===== */
-#main-content {
-  opacity:0;
-  transition: opacity 1.2s ease;
-  background:#f9f9f9;
-  min-height:100vh;
-  padding:20px;
-}
+#main-content { opacity:0; transition: opacity 1.2s ease; background:#f9f9f9; min-height:100vh; padding:20px; color:#222; }
 header { text-align:center; padding:20px 0; }
 header img.logo { max-width:150px; height:auto; }
-header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margin-top:10px; color:#222; }
+header h1 { font-size:32px; margin-top:10px; color:#222; }
 
-/* ===== 生命故事文字淡入 ===== */
+/* ===== 文字淡入 ===== */
 .fade-in-text {
-  font-family: 'Iansui', 'Noto Serif TC', serif;
-  opacity: 0;
-  transform: translateY(20px);
+  opacity:0; transform:translateY(20px);
   transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-  transition-delay: var(--delay, 0s);
+  transition-delay: var(--delay,0s);
 }
-.fade-in-text.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
+.fade-in-text.visible { opacity:1; transform:translateY(0); }
 
 /* ===== 訃告紙本 ===== */
 .paper-obituary-section {
-  max-width:800px;
-  margin:50px auto;
-  text-align:center;
+  max-width:800px; margin:50px auto; text-align:center;
 }
-.paper-obituary-section h2 {
-  font-family: 'Iansui', 'Noto Serif TC', serif;
-  font-size:32px;
-  margin-bottom:20px;
-  color:#222;
-}
+.paper-obituary-section h2 { font-size:32px; margin-bottom:20px; color:#222; }
 .paper-obituary-section img {
-  max-width:100%;
-  height:auto;
-  cursor:pointer;
-  border-radius:10px;
+  max-width:100%; height:auto; cursor:pointer; border-radius:10px;
   box-shadow:0 5px 30px rgba(0,0,0,0.4);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -215,54 +187,28 @@ header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margi
 }
 
 /* ===== 訃告燈箱 ===== */
-.lightbox {
-  display: none;
-  position: fixed; 
-  z-index: 1000; 
-  left: 0; top: 0;
-  width: 100%; height: 100%; 
-  background-color: rgba(0,0,0,0);
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.4s ease;
-}
-.lightbox.show {
-  display: flex;
-  background-color: rgba(0,0,0,0.85);
-}
-.lightbox-content {
-  max-width: 90%;
-  max-height: 80%;
-  border-radius: 10px;
-  box-shadow: 0 0 40px rgba(0,0,0,0.6);
-  opacity: 0;
-  transform: scale(0.7);
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-.lightbox.show .lightbox-content {
-  opacity: 1;
-  transform: scale(1);
-}
-.close {
-  position: absolute;
-  top: 20px;
-  right: 35px;
-  color: #fff;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.3s;
-}
-.close:hover { color: #ccc; }
+.lightbox { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background-color:rgba(0,0,0,0); align-items:center; justify-content:center; transition: background-color 0.4s ease; }
+.lightbox.show { display:flex; background-color:rgba(0,0,0,0.85); }
+.lightbox-content { max-width:90%; max-height:80%; border-radius:10px; box-shadow:0 0 40px rgba(0,0,0,0.6); opacity:0; transform:scale(0.7); transition: opacity 0.4s ease, transform 0.4s ease; }
+.lightbox.show .lightbox-content { opacity:1; transform:scale(1); }
+.close { position:absolute; top:20px; right:35px; color:#fff; font-size:40px; font-weight:bold; cursor:pointer; transition:0.3s; }
+.close:hover { color:#ccc; }
 
 /* ===== 區塊浮入 ===== */
-.main-photo-section { opacity:0; transform:translateY(20px); transition: opacity 1s ease, transform 1s ease; }
-.main-photo-section.visible { opacity:1; transform:translateY(0); }
-.paper-obituary-section { opacity:0; transform:translateY(20px); transition: opacity 1s ease, transform 1s ease; }
-.paper-obituary-section.visible { opacity:1; transform:translateY(0); }
+.main-photo-section, .paper-obituary-section, #remembrance, .remembrance-thanks { opacity:0; transform:translateY(20px); transition:opacity 1s ease, transform 1s ease; }
+.visible { opacity:1; transform:translateY(0); }
+
+/* ===== 追思與緬懷 ===== */
+#remembrance { max-width:800px; margin:50px auto; padding:20px; background:#f2f2f2; border-radius:10px; color:#222; }
+#remembrance h2 { font-size:28px; margin-bottom:20px; text-align:center; }
+.remembrance-details div { margin-bottom:15px; }
+.remembrance-details a { color:#0066cc; text-decoration:none; }
+.remembrance-details a:hover { text-decoration:underline; }
+
+/* ===== 感謝信息 ===== */
+.remembrance-thanks { max-width:800px; margin:50px auto; text-align:center; color:#222; font-size:20px; }
 </style>
 </head>
-
 <body>
 
 <!-- ===== 開場燈箱 ===== -->
@@ -281,6 +227,7 @@ header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margi
   </header>
 
   <main>
+    <!-- 主照片區 -->
     <section class="main-photo-section">
       <img id="main-photo" src="image/IMG_9336.jpeg" alt="追思照片" loading="lazy">
       <div id="life-story">
@@ -299,6 +246,50 @@ header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margi
       <h2>訃告正本</h2>
       <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy">
     </section>
+
+    <!-- 追思緬懷 -->
+    <section id="remembrance">
+      <h2><strong>追思緬懷</strong></h2>
+      <div class="remembrance-details">
+        <div>
+          <h3><strong>豎靈地點</strong></h3>
+          <p>龍華會館 [7號]</p>
+          <p><a href="https://maps.app.goo.gl/2MepRYGk5gmBUnQU9" target="_blank">地址：新北市板橋區長江路一段7號</a></p>
+        </div>
+        <div>
+          <h3><strong>出殯地點</strong></h3>
+          <p>新北市板橋殯儀館 [安逸廳]</p>
+          <p><a href="https://maps.app.goo.gl/v6JnJmp6S1cfyc376" target="_blank">地址：新北市板橋區中正路560號</a></p>
+        </div>
+        <div>
+          <h3><strong>出殯日期</strong></h3>
+          <p>2025年10月28日（二）</p>
+        </div>
+        <div>
+          <h3><strong>追思奠禮</strong></h3>
+          <p>上午七時二十分 家奠禮</p>
+          <p>上午七時五十分 公奠禮</p>
+        </div>
+        <div>
+          <h3><strong>聯絡電話</strong></h3>
+          <p>智鴻 📞<a href="tel:0921-173-261">0921-173-261</a></p>
+        </div>
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.156457822896!2d121.4578063!3d25.028763899999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a80d7ca74fcd%3A0x8c08047e5fb532b9!2sNew%20Taipei%20City%20Funeral%20Parlor!5e0!3m2!1sen!2stw!4v1730176113062!5m2!1sen!2stw" width="100%" height="350" frameborder="0" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- 感謝信息 -->
+    <section class="remembrance-thanks">
+      <article>
+        <p class="fade-in-text" style="--delay:0s;">感謝親友們在這段時間的慰問與關心</p>
+        <p class="fade-in-text" style="--delay:0.5s;">您的關懷和鼓勵</p>
+        <p class="fade-in-text" style="--delay:1s;">陪伴我們度過了這段艱難的時光</p>
+        <p class="fade-in-text" style="--delay:1.5s;">敬邀您</p>
+        <p class="fade-in-text" style="--delay:2s;">與我們一同追思懷念邱佳明先生</p>
+        <p class="fade-in-text" style="--delay:2.5s;">並向您獻上最深的敬意</p>
+        <p class="fade-in-text" style="--delay:3s;">謝謝您！</p>
+      </article>
+    </section>
   </main>
 </div>
 
@@ -309,33 +300,22 @@ header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margi
 </div>
 
 <script>
-// ===== 開場動畫 =====
+// ===== 開場燈箱 =====
 window.addEventListener('load', () => {
   const verticalTexts = document.querySelectorAll('.vertical-text');
   const intro = document.getElementById('intro-lightbox');
   const mainContent = document.getElementById('main-content');
 
-  // 文字淡入
-  verticalTexts.forEach((el, i) => {
-    setTimeout(()=> el.classList.add('show'), i*350);
-  });
-
-  // 自動關閉燈箱
-  setTimeout(() => {
-    closeIntro();
-  }, 3000); // 3 秒後自動消失
-
-  // 點擊燈箱手動關閉
-  intro.addEventListener('click', closeIntro);
+  verticalTexts.forEach((el,i)=>setTimeout(()=>el.classList.add('show'), i*350));
+  setTimeout(()=>closeIntro(), 3000);
 
   function closeIntro() {
-    intro.style.transition = 'opacity 0.8s ease';
-    intro.style.opacity = 0;
-    setTimeout(()=> {
-      intro.style.display = 'none';
-      mainContent.style.opacity = 1;
-    }, 800);
+    intro.style.transition='opacity 0.8s ease';
+    intro.style.opacity=0;
+    setTimeout(()=>{ intro.style.display='none'; mainContent.style.opacity=1; },800);
   }
+
+  intro.addEventListener('click', closeIntro);
 });
 
 // ===== 訃告紙本燈箱 =====
@@ -343,81 +323,22 @@ const img = document.getElementById('paper-obituary');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close');
-let isOpen = false;
+let isOpen=false;
 
-img.onclick = function() {
-  if(!isOpen){
-    lightboxImg.src = this.src;
-    lightbox.classList.add('show');
-    isOpen = true;
-  } else { closeLightbox(); }
-}
-function closeLightbox() {
-  lightbox.classList.remove('show');
-  setTimeout(() => { lightbox.style.display = "none"; isOpen=false; }, 300);
-}
-closeBtn.onclick = closeLightbox;
-lightbox.onclick = function(e) { if(e.target === lightbox) closeLightbox(); }
-
-// 手機滑動向下關閉
-let startY=0;
-lightbox.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; });
-lightbox.addEventListener('touchmove', function(e){
-  const deltaY = e.touches[0].clientY - startY;
-  if(deltaY > 100) closeLightbox();
-});
+img.onclick=function(){ if(!isOpen){ lightboxImg.src=this.src; lightbox.classList.add('show'); isOpen=true; } else closeLightbox(); }
+function closeLightbox(){ lightbox.classList.remove('show'); setTimeout(()=>{ lightbox.style.display='none'; isOpen=false; },300); }
+closeBtn.onclick=closeLightbox;
+lightbox.onclick=function(e){ if(e.target===lightbox) closeLightbox(); }
+lightbox.addEventListener('touchstart', e=>startY=e.touches[0].clientY);
+lightbox.addEventListener('touchmove', e=>{ if(e.touches[0].clientY-startY>100) closeLightbox(); });
 
 // ===== 文字淡入 =====
 window.addEventListener('load', ()=>{
-  document.querySelectorAll('.fade-in-text').forEach(el=>{
-    el.classList.add('visible');
-  });
+  document.querySelectorAll('.fade-in-text').forEach(el=>el.classList.add('visible'));
 });
 </script>
-</body>
-    
-   <!-- 追思與緬懷部分 -->
-<section id="remembrance">
-    <h2><strong>追思緬懷</strong></h2>
-    <div class="remembrance-details">
-        <div class="remembrance-item">
-            <h3><strong> 豎靈地點 </strong></h3>
-            <p><strong>  龍華會館 </strong></p>
-            <p><strong> 牌位區 </strong>
-            <p><strong>  [ 7號 ] </strong></p>
-            <p><strong><a href="https://maps.app.goo.gl/2MepRYGk5gmBUnQU9?g_st=ic">地址：新北市板橋區長江路一段7號</a></strong></p>
-        </div>
-        <div class="remembrance-item">
-            <h3><strong>出殯地點</strong></h3>
-            <p><strong> 新北市板橋殯儀館 </strong>
-            <p><strong> [ 安逸廳 ] </strong></p>
-            <p><strong><a href="https://maps.app.goo.gl/v6JnJmp6S1cfyc376?g_st=ipc" target="_blank">地址：新北市板橋區中正路560號 </a></strong></p>
-        </div>
-        <div class="remembrance-item">
-            <h3><strong>出殯日期</strong></h3>
-            <p><strong> 2025年10月28日（二）</strong></p>
-        </div>
-        <div class="remembrance-item">
-            <h3><strong>追思奠禮</strong></h3>
-            <p><strong>   上午  七  時  二十 分 家奠禮 </strong></p>
-            <p><strong>   上午  七  時  五十 分 公奠禮 </strong></p>
-        </div>
-        <div class="remembrance-item">
-            <h3><strong>聯繫電話</strong></h3>
-            <p><strong>智鴻 📞<a href="tel:0921-173-261">  0921-173-261 </a></strong></p>
-        </div>
-        <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.156457822896!2d121.4578063!3d25.028763899999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442a80d7ca74fcd%3A0x8c08047e5fb532b9!2sNew%20Taipei%20City%20Funeral%20Parlor!5e0!3m2!1sen!2stw!4v1730176113062!5m2!1sen!2stw"
-            width="100%" 
-            height="350" 
-            frameborder="0" allowfullscreen
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-</section>
 
+</body>
 
 
         <!-- 感謝信息部分 -->
