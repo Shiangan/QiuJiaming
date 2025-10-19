@@ -46,6 +46,7 @@ header h1 {
 .main-photo-section img,
 .paper-obituary-section img,
 .business-card-img {
+    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
     width: 100%;
     max-width: 600px;
     height: auto;
@@ -73,6 +74,7 @@ header h1 {
 }
 
 .paper-obituary-section h2 {
+    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
     font-size: 25px; /* 标题字体大小 */
     margin-bottom: 20px; /* 标题底部边距 */
     color: #333; /* 标题颜色 */
@@ -92,6 +94,7 @@ header h1 {
 }
 
 #remembrance h2 {
+    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
     font-size: 25px; /* 增大标题字体 */
     margin-bottom: 20px; /* 标题底部边距 */
     color: #333; /* 标题颜色 */
@@ -99,6 +102,7 @@ header h1 {
 }
 
 .remembrance-details {
+  font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
     display: flex;
     flex-direction: column; /* 在小屏幕上纵向排列 */
     gap: 20px;
@@ -106,6 +110,7 @@ header h1 {
 }
 
 .remembrance-item {
+  font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
     background-color: #fff;
     padding: 20px;
     border: 1px solid #ddd;
