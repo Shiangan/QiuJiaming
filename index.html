@@ -309,35 +309,33 @@ header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margi
 </div>
 
 <script>
-// ===== 開場燈箱 =====
+// ===== 開場動畫 =====
 window.addEventListener('load', () => {
   const verticalTexts = document.querySelectorAll('.vertical-text');
   const intro = document.getElementById('intro-lightbox');
   const mainContent = document.getElementById('main-content');
-  const mainSections = document.querySelectorAll('.main-photo-section, .paper-obituary-section');
 
+  // 文字淡入
   verticalTexts.forEach((el, i) => {
     setTimeout(()=> el.classList.add('show'), i*350);
   });
 
-  // 自動淡出燈箱：3秒後或手動
-  const hideIntro = () => {
-    intro.style.transition = 'opacity 1s ease';
+  // 自動關閉燈箱
+  setTimeout(() => {
+    closeIntro();
+  }, 3000); // 3 秒後自動消失
+
+  // 點擊燈箱手動關閉
+  intro.addEventListener('click', closeIntro);
+
+  function closeIntro() {
+    intro.style.transition = 'opacity 0.8s ease';
     intro.style.opacity = 0;
     setTimeout(()=> {
       intro.style.display = 'none';
       mainContent.style.opacity = 1;
-      // 文字淡入
-      document.querySelectorAll('.fade-in-text').forEach(el => el.classList.add('visible'));
-      // 區塊浮入
-      mainSections.forEach((sec, i) => setTimeout(()=> sec.classList.add('visible'), i*300));
-    }, 1000);
-  };
-
-  setTimeout(hideIntro, 3000); // 3秒後自動關閉
-
-  // 手動點擊關閉
-  intro.addEventListener('click', hideIntro);
+    }, 800);
+  }
 });
 
 // ===== 訃告紙本燈箱 =====
@@ -345,27 +343,37 @@ const img = document.getElementById('paper-obituary');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close');
+let isOpen = false;
 
 img.onclick = function() {
-  lightboxImg.src = this.src;
-  lightbox.classList.add('show');
+  if(!isOpen){
+    lightboxImg.src = this.src;
+    lightbox.classList.add('show');
+    isOpen = true;
+  } else { closeLightbox(); }
 }
-
 function closeLightbox() {
   lightbox.classList.remove('show');
-  setTimeout(() => { lightbox.style.display = "none"; }, 300);
+  setTimeout(() => { lightbox.style.display = "none"; isOpen=false; }, 300);
 }
 closeBtn.onclick = closeLightbox;
-lightbox.onclick = e => { if(e.target === lightbox) closeLightbox(); }
+lightbox.onclick = function(e) { if(e.target === lightbox) closeLightbox(); }
 
 // 手機滑動向下關閉
-let startY = 0;
-lightbox.addEventListener('touchstart', e => startY = e.touches[0].clientY);
-lightbox.addEventListener('touchmove', e => {
-  if(e.touches[0].clientY - startY > 100) closeLightbox();
+let startY=0;
+lightbox.addEventListener('touchstart', function(e){ startY = e.touches[0].clientY; });
+lightbox.addEventListener('touchmove', function(e){
+  const deltaY = e.touches[0].clientY - startY;
+  if(deltaY > 100) closeLightbox();
+});
+
+// ===== 文字淡入 =====
+window.addEventListener('load', ()=>{
+  document.querySelectorAll('.fade-in-text').forEach(el=>{
+    el.classList.add('visible');
+  });
 });
 </script>
-
 </body>
     
    <!-- 追思與緬懷部分 -->
