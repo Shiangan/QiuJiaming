@@ -186,14 +186,11 @@ document.addEventListener('DOMContentLoaded', function () {
     white-space: normal;
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-
-
-/* 燈箱 */
+    box-shadow: 0 4px 12px rgba(/* 🔍 燈箱 */
 .lightbox {
   display: none;
   position: fixed;
-  top:0; left:0;
+  top: 0; left: 0;
   width: 100vw; height: 100vh;
   background: rgba(0,0,0,0);
   justify-content: center;
@@ -203,61 +200,69 @@ document.addEventListener('DOMContentLoaded', function () {
   padding: 20px;
   transition: background 0.3s ease;
 }
-.lightbox.show { background: rgba(0,0,0,0.85); }
+.lightbox.show {
+  background: rgba(0,0,0,0.85);
+}
 .lightbox-content {
-  max-width: 90%; max-height: 90%;
-  border-radius:8px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.3);
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
   object-fit: contain;
 }
 .close-btn {
-  position: absolute; top: 20px; right: 30px;
-  font-size: 2.5rem; color:#fff; cursor:pointer; font-weight:bold; z-index:10000;
+  position: absolute;
+  top: 20px; right: 30px;
+  font-size: 2.5rem;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  z-index: 10000;
 }
 
-/* 響應式 */
-@media(max-width:600px){
-  .close-btn { top:15px; right:20px; font-size:2rem; }
-  #life-story { font-size:clamp(14px,3vw,18px); padding:15px;}
+/* 📱 響應式 */
+@media (max-width: 600px) {
+  .close-btn { top: 15px; right: 20px; font-size: 2rem; }
+  h2 { font-size: 1.4rem; }
 }
 </style>
 
 <script>
-// 燈箱
+// 🔍 燈箱功能
 const paperImg = document.getElementById('paper-obituary');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close-btn');
 
 paperImg.addEventListener('click', () => {
-  lightbox.style.display='flex';
-  setTimeout(()=>lightbox.classList.add('show'),10);
-  lightboxImg.src=paperImg.src;
+  lightbox.style.display = 'flex';
+  setTimeout(() => lightbox.classList.add('show'), 10);
+  lightboxImg.src = paperImg.src;
 });
 
-function closeLightbox(){
+function closeLightbox() {
   lightbox.classList.remove('show');
-  setTimeout(()=>lightbox.style.display='none',300);
+  setTimeout(() => lightbox.style.display = 'none', 300);
 }
 
-closeBtn.addEventListener('click',closeLightbox);
-lightbox.addEventListener('click',(e)=>{if(e.target===lightbox) closeLightbox();});
-document.addEventListener('keydown',(e)=>{if(e.key==="Escape") closeLightbox();});
+closeBtn.addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (e.key === "Escape") closeLightbox(); });
 
-// Intersection Observer
+// 📜 淡入動畫
 document.addEventListener("DOMContentLoaded", () => {
-    const fadeEls = document.querySelectorAll('.fade-in-text');
-    const observer = new IntersectionObserver(entries=>{
-        entries.forEach(entry=>{
-            if(entry.isIntersecting){
-                entry.target.classList.add('visible');
-            }
-        });
+  const fadeEls = document.querySelectorAll('.fade-in-text');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
     });
-    fadeEls.forEach(el=>observer.observe(el));
+  });
+  fadeEls.forEach(el => observer.observe(el));
 });
 </script>
-
+    
    <!-- 追思與緬懷部分 -->
 <section id="remembrance">
     <h2><strong>追思緬懷</strong></h2>
