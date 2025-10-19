@@ -145,14 +145,21 @@ document.addEventListener('DOMContentLoaded', function () {
     </section>
 
     <!-- 訃告紙本區 -->
-    <section class="paper-obituary-section">
-      <h2><strong>訃告正本</strong></h2>
-      <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy" style="cursor:pointer;">
-    </section>
+<section class="paper-obituary-section">
+  <h2><strong>訃告正本</strong></h2>
+  <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy" style="cursor:pointer;">
+</section>
+
+<!-- 燈箱容器 -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
 
 <style>
+/* 原本字體設定 */
 .fade-in-text {
-    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
+    font-family: 'Iansui', 'Noto Serif TC', serif;
     opacity: 0;
     transform: translateY(20px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
@@ -171,6 +178,68 @@ document.addEventListener('DOMContentLoaded', function () {
     font-weight: normal;
     font-style: normal;
 }
+
+/* 燈箱樣式 */
+.lightbox {
+  display: none; 
+  position: fixed; 
+  z-index: 1000; 
+  padding-top: 60px; 
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.8); 
+}
+
+.lightbox-content {
+  margin: auto;
+  display: block;
+  max-width: 90%;
+  max-height: 80%;
+  border-radius: 5px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.close {
+  position: absolute;
+  top: 20px;
+  right: 35px;
+  color: #fff;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.close:hover {
+  color: #ccc;
+}
+</style>
+
+<script>
+const img = document.getElementById('paper-obituary');
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightbox-img');
+const closeBtn = document.querySelector('.close');
+
+img.onclick = function() {
+  lightbox.style.display = "block";
+  lightboxImg.src = this.src;
+}
+
+closeBtn.onclick = function() {
+  lightbox.style.display = "none";
+}
+
+// 點背景也能關閉
+lightbox.onclick = function(e) {
+  if(e.target === lightbox) {
+    lightbox.style.display = "none";
+  }
+}
+</script>
 
 /* 生命故事區塊套用芫荽體 */
 #life-story {
@@ -492,7 +561,7 @@ document.addEventListener("DOMContentLoaded", () => {
     font-family: 'ChenYu', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
   display: inline-block;
   padding: 10px 25px;
-  font-size: 20px;
+  font-size: 22px;
   color: #fff;
   background-color: #0077e6;
   border: none;
