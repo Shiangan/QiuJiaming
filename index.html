@@ -157,7 +157,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 
 <style>
-/* 原本字體設定 */
+/* 字體設定 */
 .fade-in-text {
     font-family: 'Iansui', 'Noto Serif TC', serif;
     opacity: 0;
@@ -165,13 +165,10 @@ document.addEventListener('DOMContentLoaded', function () {
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
     transition-delay: var(--delay, 0s);
 }
-
 .fade-in-text.visible {
     opacity: 1;
     transform: translateY(0);
 }
-
-/* 字型引用 */
 @font-face {
     font-family: 'Iansui';
     src: url('Iansui-Regular.ttf') format('truetype');
@@ -184,22 +181,34 @@ document.addEventListener('DOMContentLoaded', function () {
   display: none; 
   position: fixed; 
   z-index: 1000; 
-  padding-top: 60px; 
   left: 0;
   top: 0;
   width: 100%;
   height: 100%; 
-  overflow: auto; 
-  background-color: rgba(0,0,0,0.8); 
+  background-color: rgba(0,0,0,0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.4s ease;
+}
+
+.lightbox.show {
+  background-color: rgba(0,0,0,0.8);
 }
 
 .lightbox-content {
-  margin: auto;
-  display: block;
   max-width: 90%;
   max-height: 80%;
   border-radius: 5px;
   box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: scale(0.7);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.lightbox.show .lightbox-content {
+  opacity: 1;
+  transform: scale(1);
 }
 
 .close {
@@ -212,9 +221,14 @@ document.addEventListener('DOMContentLoaded', function () {
   cursor: pointer;
   transition: 0.3s;
 }
-
 .close:hover {
   color: #ccc;
+}
+
+/* 背景淡入動畫 */
+@keyframes fadeInBg {
+  from { background-color: rgba(0,0,0,0); }
+  to { background-color: rgba(0,0,0,0.8); }
 }
 </style>
 
@@ -224,22 +238,41 @@ const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close');
 
+// 點圖片打開燈箱
 img.onclick = function() {
-  lightbox.style.display = "block";
+  lightbox.style.display = "flex";
   lightboxImg.src = this.src;
+  setTimeout(() => {
+    lightbox.classList.add('show');
+  }, 10);
 }
 
-closeBtn.onclick = function() {
-  lightbox.style.display = "none";
-}
-
-// 點背景也能關閉
-lightbox.onclick = function(e) {
-  if(e.target === lightbox) {
+// 關閉燈箱函式
+function closeLightbox() {
+  lightbox.classList.remove('show');
+  setTimeout(() => {
     lightbox.style.display = "none";
-  }
+  }, 300);
 }
+
+closeBtn.onclick = closeLightbox;
+lightbox.onclick = function(e) {
+  if(e.target === lightbox) closeLightbox();
+}
+
+// 手機滑動向下關閉
+let startY = 0;
+lightbox.addEventListener('touchstart', function(e) {
+  startY = e.touches[0].clientY;
+});
+lightbox.addEventListener('touchmove', function(e) {
+  const deltaY = e.touches[0].clientY - startY;
+  if(deltaY > 100) { // 向下滑超過 100px
+    closeLightbox();
+  }
+});
 </script>
+    
 <style>
 /* 生命故事區塊套用芫荽體 */
 #life-story {
