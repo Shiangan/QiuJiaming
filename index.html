@@ -108,14 +108,12 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 </script>
 
-    <style>
-/* 字型設定 */
+<style>
+/* ===== 字型 ===== */
 @font-face {
   font-family: 'Iansui';
   src: url('Iansui-Regular.ttf') format('truetype');
 }
-
-/* 全頁重置 */
 body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#111; }
 
 /* ===== 開場燈箱 ===== */
@@ -131,7 +129,6 @@ body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#11
   overflow: hidden;
 }
 
-/* 背景光暈動畫 */
 .intro-lightbox::before {
   content:'';
   position:absolute;
@@ -144,12 +141,11 @@ body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#11
   100% { transform: scale(1.1) rotate(360deg); opacity:0.6; }
 }
 
-/* 燈箱文字 */
 .intro-content {
   position: relative;
   display:flex;
   gap:60px;
-  filter: drop-shadow(0 0 20px rgba(255,255,255,0.5));
+  filter: drop-shadow(0 0 30px rgba(255,255,255,0.6));
   z-index:2;
 }
 .vertical-text {
@@ -160,163 +156,93 @@ body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#11
   font-size:50px;
   opacity:0;
   transform: scale(0.6);
+  text-shadow: 0 0 8px rgba(255,255,255,0.8);
   transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 .vertical-text.show {
   opacity:1;
   transform: scale(1);
 }
-        </style>
 
+/* ===== 主頁 ===== */
+#main-content {
+  opacity:0;
+  transition: opacity 1.2s ease;
+  background:#f9f9f9;
+  min-height:100vh;
+  padding:20px;
+}
+header { text-align:center; padding:20px 0; }
+header img.logo { max-width:150px; height:auto; }
+header h1 { font-family: 'Iansui', 'Noto Serif TC', serif; font-size:32px; margin-top:10px; color:#222; }
 
-
-<!-- ===== 開場燈箱 ===== -->
-<div id="intro-lightbox" class="intro-lightbox">
-  <div class="intro-content">
-    <div class="vertical-text">
-      <p>邱</p>
-      <p>佳</p>
-      <p>明</p>
-    </div>
-    <div class="vertical-text">
-      <p>追</p>
-      <p>思</p>
-      <p>資</p>
-      <p>訊</p>
-    </div>
-  </div>
-</div>
-    <script>
-        
-    <!-- ===== JS 開場動畫 ===== -->
-<script>
-window.addEventListener('load', () => {
-  const verticalTexts = document.querySelectorAll('.vertical-text');
-  const intro = document.getElementById('intro-lightbox');
-  const mainContent = document.getElementById('main-content');
-
-  // 文字逐個淡入
-  verticalTexts.forEach((el, i) => {
-    setTimeout(()=> el.classList.add('show'), i*350);
-  });
-
-  // 停留 + 淡出燈箱，主頁淡入
-  setTimeout(() => {
-    intro.style.transition = 'opacity 1s ease';
-    intro.style.opacity = 0;
-    setTimeout(()=> {
-      intro.style.display = 'none';
-      mainContent.style.opacity = 1;
-    }, 1000);
-  }, verticalTexts.length*350 + 1200);
-});
-</script>
-
-</body>
-    
-<header>
-  <img src="image/logo.png" alt="Logo" class="logo" loading="lazy">
-  <h1 class="no-break">邱佳明先生 訃告</h1>
-</header>
-
-
-<main>
-    <section class="main-photo-section">
-        <img id="main-photo" src="image/IMG_9336.jpeg" alt="追思照片" loading="lazy">
-
-        <div id="life-story">
-            <p class="fade-in-text" style="--delay:0s;"><strong>我們摯愛的親人 邱佳明先生</strong></p>
-
-            <p class="fade-in-text" style="--delay:0.3s;"><strong>於民國114年10月16日<br>
-               走完49年的人生旅程，<br>
-               留下我們永恆的追思與感恩。</strong></p>
-
-            <p class="fade-in-text" style="--delay:0.6s;"><strong>謹擇於<br>
-               民國114年10月28日（星期二）<br>
-               板橋殯儀館［ 安詳廳 ］<br>
-               舉辦告別追思奠禮</strong></p>
-
-            <p class="fade-in-text" style="--delay:0.9s;"><strong>敬邀至親好友蒞臨獻上哀思<br>
-               並向您獻上最深的敬意。</strong></p>
-
-            <p class="fade-in-text" style="--delay:1.2s;"><strong>感謝您的關懷與陪伴<br>
-               家人們銘記在心，衷心感謝。</strong></p>
-
-            <p class="fade-in-text" style="--delay:1.5s;"><strong>豎靈地點：板橋龍華會館<br>
-               地址：新北市板橋區長江路一段7號</strong></p>
-
-            <p class="fade-in-text" style="--delay:1.8s;"><strong>出殯地點：新北市板橋殯儀館<br>
-               地址：新北市板橋區中正路560號</strong></p>
-        </div>
-    </section>
-
- <!-- 訃告紙本區 -->
-<section class="paper-obituary-section">
-  <h2><strong>訃告正本</strong></h2>
-  <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy" style="cursor:pointer;">
-</section>
-
-<!-- 燈箱容器 -->
-<div id="lightbox" class="lightbox">
-  <span class="close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img">
-</div>
-
-<style>
-/* 字體設定 */
+/* ===== 生命故事文字淡入 ===== */
 .fade-in-text {
-    font-family: 'Iansui', 'Noto Serif TC', serif;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    transition-delay: var(--delay, 0s);
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+  transition-delay: var(--delay, 0s);
 }
 .fade-in-text.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-@font-face {
-    font-family: 'Iansui';
-    src: url('Iansui-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  opacity: 1;
+  transform: translateY(0);
 }
 
-/* 燈箱樣式 */
+/* ===== 訃告紙本 ===== */
+.paper-obituary-section {
+  max-width:800px;
+  margin:50px auto;
+  text-align:center;
+}
+.paper-obituary-section h2 {
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+  font-size:32px;
+  margin-bottom:20px;
+  color:#222;
+}
+.paper-obituary-section img {
+  max-width:100%;
+  height:auto;
+  cursor:pointer;
+  border-radius:10px;
+  box-shadow:0 5px 30px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.paper-obituary-section img:hover {
+  transform: scale(1.02);
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+
+/* ===== 訃告燈箱 ===== */
 .lightbox {
-  display: none; /* 初始隱藏 */
+  display: none;
   position: fixed; 
   z-index: 1000; 
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%; 
+  left: 0; top: 0;
+  width: 100%; height: 100%; 
   background-color: rgba(0,0,0,0);
   align-items: center;
   justify-content: center;
   transition: background-color 0.4s ease;
 }
-
 .lightbox.show {
-  display: flex; /* 點擊時顯示 */
-  background-color: rgba(0,0,0,0.8);
+  display: flex;
+  background-color: rgba(0,0,0,0.85);
 }
-
 .lightbox-content {
   max-width: 90%;
   max-height: 80%;
-  border-radius: 5px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+  border-radius: 10px;
+  box-shadow: 0 0 40px rgba(0,0,0,0.6);
   opacity: 0;
   transform: scale(0.7);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
-
 .lightbox.show .lightbox-content {
   opacity: 1;
   transform: scale(1);
 }
-
 .close {
   position: absolute;
   top: 20px;
@@ -327,59 +253,121 @@ window.addEventListener('load', () => {
   cursor: pointer;
   transition: 0.3s;
 }
-.close:hover {
-  color: #ccc;
-}
+.close:hover { color: #ccc; }
+
+/* ===== 區塊浮入 ===== */
+.main-photo-section { opacity:0; transform:translateY(20px); transition: opacity 1s ease, transform 1s ease; }
+.main-photo-section.visible { opacity:1; transform:translateY(0); }
+.paper-obituary-section { opacity:0; transform:translateY(20px); transition: opacity 1s ease, transform 1s ease; }
+.paper-obituary-section.visible { opacity:1; transform:translateY(0); }
 </style>
+</head>
+
+<body>
+
+<!-- ===== 開場燈箱 ===== -->
+<div id="intro-lightbox" class="intro-lightbox">
+  <div class="intro-content">
+    <div class="vertical-text"><p>邱</p><p>佳</p><p>明</p></div>
+    <div class="vertical-text"><p>追</p><p>思</p><p>資</p><p>訊</p></div>
+  </div>
+</div>
+
+<!-- ===== 主頁內容 ===== -->
+<div id="main-content">
+  <header>
+    <img src="image/logo.png" alt="Logo" class="logo" loading="lazy">
+    <h1 class="no-break">邱佳明先生 訃告</h1>
+  </header>
+
+  <main>
+    <section class="main-photo-section">
+      <img id="main-photo" src="image/IMG_9336.jpeg" alt="追思照片" loading="lazy">
+      <div id="life-story">
+        <p class="fade-in-text" style="--delay:0s;"><strong>我們摯愛的親人 邱佳明先生</strong></p>
+        <p class="fade-in-text" style="--delay:0.3s;"><strong>於民國114年10月16日<br>走完49年的人生旅程，<br>留下我們永恆的追思與感恩。</strong></p>
+        <p class="fade-in-text" style="--delay:0.6s;"><strong>謹擇於<br>民國114年10月28日（星期二）<br>板橋殯儀館［ 安詳廳 ］<br>舉辦告別追思奠禮</strong></p>
+        <p class="fade-in-text" style="--delay:0.9s;"><strong>敬邀至親好友蒞臨獻上哀思<br>並向您獻上最深的敬意。</strong></p>
+        <p class="fade-in-text" style="--delay:1.2s;"><strong>感謝您的關懷與陪伴<br>家人們銘記在心，衷心感謝。</strong></p>
+        <p class="fade-in-text" style="--delay:1.5s;"><strong>豎靈地點：板橋龍華會館<br>地址：新北市板橋區長江路一段7號</strong></p>
+        <p class="fade-in-text" style="--delay:1.8s;"><strong>出殯地點：新北市板橋殯儀館<br>地址：新北市板橋區中正路560號</strong></p>
+      </div>
+    </section>
+
+    <!-- 訃告紙本區 -->
+    <section class="paper-obituary-section">
+      <h2>訃告正本</h2>
+      <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy">
+    </section>
+  </main>
+</div>
+
+<!-- 訃告燈箱 -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
 
 <script>
+// ===== 開場燈箱 =====
+window.addEventListener('load', () => {
+  const verticalTexts = document.querySelectorAll('.vertical-text');
+  const intro = document.getElementById('intro-lightbox');
+  const mainContent = document.getElementById('main-content');
+  const mainSections = document.querySelectorAll('.main-photo-section, .paper-obituary-section');
+
+  verticalTexts.forEach((el, i) => {
+    setTimeout(()=> el.classList.add('show'), i*350);
+  });
+
+  // 自動淡出燈箱：3秒後或手動
+  const hideIntro = () => {
+    intro.style.transition = 'opacity 1s ease';
+    intro.style.opacity = 0;
+    setTimeout(()=> {
+      intro.style.display = 'none';
+      mainContent.style.opacity = 1;
+      // 文字淡入
+      document.querySelectorAll('.fade-in-text').forEach(el => el.classList.add('visible'));
+      // 區塊浮入
+      mainSections.forEach((sec, i) => setTimeout(()=> sec.classList.add('visible'), i*300));
+    }, 1000);
+  };
+
+  setTimeout(hideIntro, 3000); // 3秒後自動關閉
+
+  // 手動點擊關閉
+  intro.addEventListener('click', hideIntro);
+});
+
+// ===== 訃告紙本燈箱 =====
 const img = document.getElementById('paper-obituary');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const closeBtn = document.querySelector('.close');
 
-let isOpen = false; // 追蹤燈箱狀態
-
-// 點圖片打開或關閉燈箱
 img.onclick = function() {
-  if(!isOpen){
-    // 打開
-    lightboxImg.src = this.src;
-    lightbox.classList.add('show');
-    isOpen = true;
-  } else {
-    // 再次點擊縮回
-    closeLightbox();
-  }
+  lightboxImg.src = this.src;
+  lightbox.classList.add('show');
 }
 
-// 關閉燈箱函式
 function closeLightbox() {
   lightbox.classList.remove('show');
-  setTimeout(() => {
-    lightbox.style.display = "none";
-    isOpen = false;
-  }, 300);
+  setTimeout(() => { lightbox.style.display = "none"; }, 300);
 }
-
-// 點背景或 × 關閉
 closeBtn.onclick = closeLightbox;
-lightbox.onclick = function(e) {
-  if(e.target === lightbox) closeLightbox();
-}
+lightbox.onclick = e => { if(e.target === lightbox) closeLightbox(); }
 
 // 手機滑動向下關閉
 let startY = 0;
-lightbox.addEventListener('touchstart', function(e) {
-  startY = e.touches[0].clientY;
-});
-lightbox.addEventListener('touchmove', function(e) {
-  const deltaY = e.touches[0].clientY - startY;
-  if(deltaY > 100) { // 向下滑超過 100px
-    closeLightbox();
-  }
+lightbox.addEventListener('touchstart', e => startY = e.touches[0].clientY);
+lightbox.addEventListener('touchmove', e => {
+  if(e.touches[0].clientY - startY > 100) closeLightbox();
 });
 </script>
+
+</body>
+    
    <!-- 追思與緬懷部分 -->
 <section id="remembrance">
     <h2><strong>追思緬懷</strong></h2>
