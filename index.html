@@ -151,7 +151,6 @@ document.addEventListener('DOMContentLoaded', function () {
     </section>
 
 <style>
-/* fade-in 動畫 */
 .fade-in-text {
     opacity: 0;
     transform: translateY(20px);
@@ -164,21 +163,30 @@ document.addEventListener('DOMContentLoaded', function () {
     transform: translateY(0);
 }
 
-#life-story {
-    text-align: center;
-    font-size: clamp(16px, 2vw, 20px);
-    line-height: 1.8;
-    margin: 0 auto 30px;
-    max-width: 800px;
-    padding: 20px;
-    font-family: 'DFKai-SB' , '標楷體' , 'Noto Serif', 'MingLiU', serif;
-    color: #333;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    letter-spacing: 0.5px;
-    word-break: keep-all;
+/* 字型引用 */
+@font-face {
+    font-family: 'Iansui';
+    src: url('fonts/Iansui-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
 }
+
+/* 生命故事區塊套用芫荽體 */
+#life-story {
+    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
+    text-align: center;
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    font-size: 18px;
+    line-height: 1.8;
+    letter-spacing: 0.5px;
+    word-break: keep-all;  /* 中文不亂拆 */
+    white-space: normal;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+
 
 /* 燈箱 */
 .lightbox {
