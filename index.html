@@ -151,21 +151,19 @@ document.addEventListener('DOMContentLoaded', function () {
        style="cursor:pointer; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); max-width:90%; height:auto;">
 </section>
 
-<!-- 🔍 放大燈箱 -->
-<div id="lightbox" class="lightbox">
-  <div class="lightbox-inner">
-    <img id="lightbox-img" class="lightbox-content" alt="放大檢視">
-  </div>
+<!-- 🔍 放大預覽容器 -->
+<div id="zoom-container">
+  <img id="zoom-img" src="" alt="放大檢視">
 </div>
 
 <style>
-/* ✒️ 字型引用 */
+/* 字型 */
 @font-face {
   font-family: 'Iansui';
   src: url('Iansui-Regular.ttf') format('truetype');
 }
 
-/* 📜 淡入效果 */
+/* 淡入效果 */
 .fade-in-text {
   font-family: 'Iansui', 'Noto Serif TC', serif;
   opacity: 0;
@@ -177,53 +175,37 @@ document.addEventListener('DOMContentLoaded', function () {
   transform: translateY(0);
 }
 
-/* 🔍 燈箱背景 */
-.lightbox {
-  display: none;
+/* 🔍 放大容器樣式（無黑背景） */
+#zoom-container {
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0, 0, 0, 0);
+  display: none;
   justify-content: center;
   align-items: center;
+  backdrop-filter: blur(3px) brightness(0.95); /* 模糊＋亮度微降 */
   z-index: 9999;
-  transition: background 0.6s ease;
-  overflow: hidden;
-}
-.lightbox.show {
-  background: rgba(0, 0, 0, 0.88);
 }
 
-/* 內容容器 */
-.lightbox-inner {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%; height: 100%;
-}
-
-/* ✨ 放大圖片樣式 */
-.lightbox-content {
-  max-width: 85%;
+/* ✨ 放大圖片動畫 */
+#zoom-img {
+  max-width: 80%;
   max-height: 85%;
   border-radius: 10px;
-  object-fit: contain;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  transform: scale(0.9);
   opacity: 0;
-  transform: scale(0.92);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transition: transform 0.4s ease, opacity 0.4s ease;
 }
 
-/* 顯示動畫 */
-.lightbox.show .lightbox-content {
-  opacity: 1;
+#zoom-container.show #zoom-img {
   transform: scale(1);
+  opacity: 1;
 }
 
-/* 📱 響應式調整 */
+/* 響應式 */
 @media (max-width: 600px) {
-  h2 { font-size: 1.3rem; }
-  .lightbox-content {
+  #zoom-img {
     max-width: 92%;
     max-height: 80%;
   }
@@ -233,30 +215,30 @@ document.addEventListener('DOMContentLoaded', function () {
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const paperImg = document.getElementById('paper-obituary');
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
+  const zoomContainer = document.getElementById('zoom-container');
+  const zoomImg = document.getElementById('zoom-img');
 
-  // ✅ 點擊圖片放大
-  if (paperImg && lightbox && lightboxImg) {
+  if (paperImg && zoomContainer && zoomImg) {
+    // 點圖片放大
     paperImg.addEventListener('click', () => {
-      lightbox.style.display = 'flex';
-      lightboxImg.src = paperImg.src;
-      setTimeout(() => lightbox.classList.add('show'), 20);
+      zoomImg.src = paperImg.src;
+      zoomContainer.style.display = 'flex';
+      setTimeout(() => zoomContainer.classList.add('show'), 20);
     });
 
-    // 點背景關閉
-    lightbox.addEventListener('click', e => {
-      if (e.target === lightbox) {
-        lightbox.classList.remove('show');
-        setTimeout(() => lightbox.style.display = 'none', 400);
+    // 點外圍關閉
+    zoomContainer.addEventListener('click', e => {
+      if (e.target === zoomContainer) {
+        zoomContainer.classList.remove('show');
+        setTimeout(() => zoomContainer.style.display = 'none', 300);
       }
     });
 
     // 按 ESC 關閉
     document.addEventListener('keydown', e => {
       if (e.key === "Escape") {
-        lightbox.classList.remove('show');
-        setTimeout(() => lightbox.style.display = 'none', 400);
+        zoomContainer.classList.remove('show');
+        setTimeout(() => zoomContainer.style.display = 'none', 300);
       }
     });
   }
