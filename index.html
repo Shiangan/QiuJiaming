@@ -288,9 +288,10 @@ document.addEventListener("DOMContentLoaded", () => {
   display: block;
   margin: 0 auto;
   width: 95%;
-  max-width: 100%;
+  max-width: 900%;
   white-space: pre-line; /* 保留 <br> */
   transform-origin: center center;
+   
 }
 
 /* 讓內容在不同設備自動縮放以適應畫面寬度 */
@@ -347,7 +348,88 @@ document.addEventListener("DOMContentLoaded", () => {
   opacity: 1;
   transform: translateY(0);
 }
+* 燈箱 */
+#zoom-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(5px) brightness(0.85);
+  background-color: rgba(0,0,0,0.7);
+  z-index: 9999;
+  overflow: auto;
+  padding: 20px;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
+#zoom-container.show {
+  display: flex;
+  opacity: 1;
+}
+#zoom-img {
+  max-width: 80%;
+  max-height: 85%;
+  border-radius: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.35);
+  transform: scale(0.9);
+  opacity: 0;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+#zoom-container.show #zoom-img {
+  transform: scale(1);
+  opacity: 1;
+}
 
+/* 響應式 */
+@media (max-width: 768px) {
+  #life-story { font-size: clamp(16px, 2.8vw, 20px); }
+  #zoom-img { max-width: 90%; max-height: 80%; }
+}
+@media (max-width: 480px) {
+  #life-story { font-size: clamp(14px, 3.5vw, 18px); }
+  #zoom-img { max-width: 95%; max-height: 75%; }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  // Life-story 淡入效果
+  const fadeEls = document.querySelectorAll('.fade-in-text');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+  });
+  fadeEls.forEach(el => observer.observe(el));
+
+  // 訃告紙本點擊放大
+  const paperImg = document.getElementById('paper-obituary');
+  const zoomContainer = document.getElementById('zoom-container');
+  const zoomImg = document.getElementById('zoom-img');
+
+  paperImg.addEventListener('click', () => {
+    zoomImg.src = paperImg.src;
+    zoomContainer.style.display = 'flex';
+    setTimeout(() => zoomContainer.classList.add('show'), 20);
+  });
+
+  zoomContainer.addEventListener('click', e => {
+    if (e.target === zoomContainer) {
+      zoomContainer.classList.remove('show');
+      setTimeout(() => zoomContainer.style.display = 'none', 400);
+    }
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === "Escape") {
+      zoomContainer.classList.remove('show');
+      setTimeout(() => zoomContainer.style.display = 'none', 400);
+    }
+  });
+});
+</script>
 </style>
 
 <!-- 🕊️ 追思與緬懷部分 -->
