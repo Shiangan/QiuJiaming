@@ -144,119 +144,128 @@ document.addEventListener('DOMContentLoaded', function () {
         </div>
     </section>
 
-    <!-- 訃告紙本區 -->
-    <section class="paper-obituary-section">
-      <h2><strong>訃告正本</strong></h2>
-      <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy" style="cursor:pointer;">
-    </section>
+    <!-- 📜 訃告紙本區 -->
+<section class="paper-obituary-section fade-in-text" style="text-align:center;">
+  <h2><strong>訃告正本</strong></h2>
+  <img id="paper-obituary" src="image/IMG_9345.jpeg" alt="訃聞紙本" loading="lazy"
+       style="cursor:pointer; border-radius:8px; box-shadow:0 4px 12px rgba(0,0,0,0.15); max-width:90%; height:auto;">
+</section>
+
+<!-- 🔍 放大燈箱 -->
+<div id="lightbox" class="lightbox">
+  <div class="lightbox-inner">
+    <img id="lightbox-img" class="lightbox-content" alt="放大檢視">
+  </div>
+</div>
 
 <style>
-.fade-in-text {
-    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-    transition-delay: var(--delay, 0s);
-}
-
-.fade-in-text.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 字型引用 */
+/* ✒️ 字型引用 */
 @font-face {
-    font-family: 'Iansui';
-    src: url('Iansui-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'Iansui';
+  src: url('Iansui-Regular.ttf') format('truetype');
 }
 
-/* 生命故事區塊套用芫荽體 */
-#life-story {
-    font-family: 'Iansui', 'Noto Serif TC', serif; /* 先套用芫荽體，備援 Noto Serif TC */
-    text-align: center;
-    max-width: 800px;
-    margin: 30px auto;
-    padding: 20px;
-    font-size: 18px;
-    line-height: 1.8;
-    letter-spacing: 0.5px;
-    word-break: keep-all;  /* 中文不亂拆 */
-    white-space: normal;
-    background-color: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(/* 🔍 燈箱 */
+/* 📜 淡入效果 */
+.fade-in-text {
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+.fade-in-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 🔍 燈箱背景 */
 .lightbox {
   display: none;
   position: fixed;
   top: 0; left: 0;
   width: 100vw; height: 100vh;
-  background: rgba(0,0,0,0);
+  background: rgba(0, 0, 0, 0);
   justify-content: center;
   align-items: center;
   z-index: 9999;
-  overflow: auto;
-  padding: 20px;
-  transition: background 0.3s ease;
+  transition: background 0.6s ease;
+  overflow: hidden;
 }
 .lightbox.show {
-  background: rgba(0,0,0,0.85);
-}
-.lightbox-content {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-  object-fit: contain;
-}
-.close-btn {
-  position: absolute;
-  top: 20px; right: 30px;
-  font-size: 2.5rem;
-  color: #fff;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 10000;
+  background: rgba(0, 0, 0, 0.88);
 }
 
-/* 📱 響應式 */
+/* 內容容器 */
+.lightbox-inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%; height: 100%;
+}
+
+/* ✨ 放大圖片樣式 */
+.lightbox-content {
+  max-width: 85%;
+  max-height: 85%;
+  border-radius: 10px;
+  object-fit: contain;
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+}
+
+/* 顯示動畫 */
+.lightbox.show .lightbox-content {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 📱 響應式調整 */
 @media (max-width: 600px) {
-  .close-btn { top: 15px; right: 20px; font-size: 2rem; }
-  h2 { font-size: 1.4rem; }
+  h2 { font-size: 1.3rem; }
+  .lightbox-content {
+    max-width: 92%;
+    max-height: 80%;
+  }
 }
 </style>
 
 <script>
-// 🔍 燈箱功能
-const paperImg = document.getElementById('paper-obituary');
-const lightbox = document.getElementById('lightbox');
-const lightboxImg = document.getElementById('lightbox-img');
-const closeBtn = document.querySelector('.close-btn');
-
-paperImg.addEventListener('click', () => {
-  lightbox.style.display = 'flex';
-  setTimeout(() => lightbox.classList.add('show'), 10);
-  lightboxImg.src = paperImg.src;
-});
-
-function closeLightbox() {
-  lightbox.classList.remove('show');
-  setTimeout(() => lightbox.style.display = 'none', 300);
-}
-
-closeBtn.addEventListener('click', closeLightbox);
-lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
-document.addEventListener('keydown', e => { if (e.key === "Escape") closeLightbox(); });
-
-// 📜 淡入動畫
 document.addEventListener("DOMContentLoaded", () => {
+  const paperImg = document.getElementById('paper-obituary');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  // ✅ 點擊圖片放大
+  if (paperImg && lightbox && lightboxImg) {
+    paperImg.addEventListener('click', () => {
+      lightbox.style.display = 'flex';
+      lightboxImg.src = paperImg.src;
+      setTimeout(() => lightbox.classList.add('show'), 20);
+    });
+
+    // 點背景關閉
+    lightbox.addEventListener('click', e => {
+      if (e.target === lightbox) {
+        lightbox.classList.remove('show');
+        setTimeout(() => lightbox.style.display = 'none', 400);
+      }
+    });
+
+    // 按 ESC 關閉
+    document.addEventListener('keydown', e => {
+      if (e.key === "Escape") {
+        lightbox.classList.remove('show');
+        setTimeout(() => lightbox.style.display = 'none', 400);
+      }
+    });
+  }
+
+  // ✨ 淡入動畫
   const fadeEls = document.querySelectorAll('.fade-in-text');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
+      if (entry.isIntersecting) entry.target.classList.add('visible');
     });
   });
   fadeEls.forEach(el => observer.observe(el));
