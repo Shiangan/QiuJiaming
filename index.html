@@ -258,7 +258,26 @@ document.addEventListener('DOMContentLoaded', function () {
   transform: translateY(0);
 }
 
-/* 放大容器樣式 */
+
+/* 訃告紙本區 */
+.paper-obituary-section {
+  margin: 30px auto;
+  text-align: center;
+}
+
+#paper-obituary {
+  cursor: pointer;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  max-width: 90%;
+  height: auto;
+  transition: transform 0.3s ease;
+}
+#paper-obituary:hover {
+  transform: scale(1.02);
+}
+
+/* 燈箱 */
 #zoom-container {
   position: fixed;
   top: 0; left: 0;
@@ -266,8 +285,17 @@ document.addEventListener('DOMContentLoaded', function () {
   display: none;
   justify-content: center;
   align-items: center;
-  backdrop-filter: blur(3px) brightness(0.95);
+  backdrop-filter: blur(5px) brightness(0.85);
+  background-color: rgba(0,0,0,0.7);
   z-index: 9999;
+  overflow: auto;
+  padding: 20px;
+  transition: opacity 0.4s ease;
+  opacity: 0;
+}
+#zoom-container.show {
+  display: flex;
+  opacity: 1;
 }
 #zoom-img {
   max-width: 80%;
@@ -283,12 +311,14 @@ document.addEventListener('DOMContentLoaded', function () {
   opacity: 1;
 }
 
-/* 響應式圖片放大 */
-@media (max-width: 600px) {
-  #zoom-img {
-    max-width: 92%;
-    max-height: 80%;
-  }
+/* 響應式 */
+@media (max-width: 768px) {
+  #life-story { font-size: clamp(16px, 2.8vw, 20px); }
+  #zoom-img { max-width: 90%; max-height: 80%; }
+}
+@media (max-width: 480px) {
+  #life-story { font-size: clamp(14px, 3.5vw, 18px); }
+  #zoom-img { max-width: 95%; max-height: 75%; }
 }
 </style>
 
@@ -305,20 +335,48 @@ document.addEventListener("DOMContentLoaded", () => {
       setTimeout(() => zoomContainer.classList.add('show'), 20);
     });
 
-    zoomContainer.addEventListener('click', e => {
-      if (e.target === zoomContainer) {
-        zoomContainer.classList.remove('show');
-        setTimeout(() => zoomContainer.style.display = 'none', 300);
-      }
-    });
+// 訃告燈箱
+const paperImg = document.getElementById('paper-obituary');
+const zoomContainer = document.getElementById('zoom-container');
+const zoomImg = document.getElementById('zoom-img');
 
-    document.addEventListener('keydown', e => {
-      if (e.key === "Escape") {
-        zoomContainer.classList.remove('show');
-        setTimeout(() => zoomContainer.style.display = 'none', 300);
-      }
-    });
+paperImg.addEventListener('click', () => {
+  zoomImg.src = paperImg.src;
+  zoomContainer.style.display = 'flex';
+  setTimeout(() => zoomContainer.classList.add('show'), 20);
+});
+
+zoomContainer.addEventListener('click', e => {
+  if(e.target === zoomContainer){
+    zoomContainer.classList.remove('show');
+    setTimeout(() => zoomContainer.style.display='none', 400);
   }
+});
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'Escape'){
+    zoomContainer.classList.remove('show');
+    setTimeout(() => zoomContainer.style.display='none', 400);
+  }
+});
+
+// 手機拖曳查看大圖
+let startX, startY, initialX = 0, initialY = 0, isDragging = false;
+zoomImg.addEventListener('touchstart', e => {
+  if(e.touches.length === 1){
+    isDragging = true;
+    startX = e.touches[0].clientX - initialX;
+    startY = e.touches[0].clientY - initialY;
+  }
+});
+zoomImg.addEventListener('touchmove', e => {
+  if(isDragging){
+    initialX = e.touches[0].clientX - startX;
+    initialY = e.touches[0].clientY - startY;
+    zoomImg.style.transform = `translate(${initialX}px, ${initialY}px) scale(1)`;
+  }
+});
+zoomImg.addEventListener('touchend', () => { isDragging = false; });
 
   // 淡入效果
   const fadeEls = document.querySelectorAll('.fade-in-text');
