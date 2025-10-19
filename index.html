@@ -184,21 +184,36 @@ document.addEventListener('DOMContentLoaded', function () {
 }
 
 /* 📜 Life-story 區塊設定 */
+//* 📜 Life Story 區塊樣式 */
 #life-story {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;  /* 垂直置中 */
-  align-items: center;       /* 水平置中 */
-  text-align: center;
   font-family: 'Iansui', 'Noto Serif TC', serif;
-  max-width: 90vw;
-  margin: 2em auto 0 auto;
-  line-height: 1.45;
-  word-break: keep-all;
-  white-space: normal;
-  overflow-wrap: break-word;
-  font-size: clamp(16px, 2.2vw, 24px);
+  font-size: clamp(18px, 2vw, 22px); /* 根據設備自動縮放字體 */
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: #2e2e2e;
+  text-align: center;
+  white-space: nowrap; /* ❗ 不換行 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+  margin: 0 auto;
+  width: 95%;
+  max-width: 100%;
+  transform-origin: center center;
+}
+
+/* 讓內容在不同設備自動縮放以適應畫面寬度 */
+@media (max-width: 900px) {
+  #life-story { font-size: clamp(14px, 2.4vw, 18px); }
+}
+@media (max-width: 600px) {
+  #life-story { font-size: clamp(13px, 2.8vw, 16px); }
+}
+
+/* 段落之間保留空間感 */
+
+#life-story p {
+  margin: 0.7em 0; /* 段落間距自然 */
 }
 
 /* 段落穩定換行與間距 */
@@ -207,6 +222,11 @@ document.addEventListener('DOMContentLoaded', function () {
   width: 100%;
   margin: 0.8em 0;
   white-space: pre-line; /* 保留 <br> */
+}
+
+    #life-story strong {
+  display: inline-block;
+  text-indent: 0;
 }
 
 /* 不同裝置自動調整 */
@@ -237,7 +257,7 @@ document.addEventListener('DOMContentLoaded', function () {
   transform: translateY(0);
 }
 
-/* 🔍 放大容器樣式（模糊背景） */
+/* 放大容器樣式 */
 #zoom-container {
   position: fixed;
   top: 0; left: 0;
@@ -248,8 +268,6 @@ document.addEventListener('DOMContentLoaded', function () {
   backdrop-filter: blur(3px) brightness(0.95);
   z-index: 9999;
 }
-
-/* ✨ 放大圖片動畫 */
 #zoom-img {
   max-width: 80%;
   max-height: 85%;
@@ -259,13 +277,12 @@ document.addEventListener('DOMContentLoaded', function () {
   opacity: 0;
   transition: transform 0.4s ease, opacity 0.4s ease;
 }
-
 #zoom-container.show #zoom-img {
   transform: scale(1);
   opacity: 1;
 }
 
-/* 響應式放大圖片調整 */
+/* 響應式圖片放大 */
 @media (max-width: 600px) {
   #zoom-img {
     max-width: 92%;
@@ -280,8 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const zoomContainer = document.getElementById('zoom-container');
   const zoomImg = document.getElementById('zoom-img');
 
-  // 圖片放大功能
-  if (paperImg && zoomContainer && zoomImg) {
+  if (paperImg) {
     paperImg.addEventListener('click', () => {
       zoomImg.src = paperImg.src;
       zoomContainer.style.display = 'flex';
@@ -303,7 +319,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // 淡入動畫控制
+  // 淡入效果
   const fadeEls = document.querySelectorAll('.fade-in-text');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -313,7 +329,6 @@ document.addEventListener("DOMContentLoaded", () => {
   fadeEls.forEach(el => observer.observe(el));
 });
 </script>
-
 <!-- 🕊️ 追思與緬懷部分 -->
 <section id="remembrance">
   <h2><strong>追思緬懷</strong></h2>
