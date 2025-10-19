@@ -186,6 +186,33 @@ body, html { margin:0; padding:0; height:100%; overflow-x:hidden; background:#11
     </div>
   </div>
 </div>
+    <script>
+        
+    <!-- ===== JS 開場動畫 ===== -->
+<script>
+window.addEventListener('load', () => {
+  const verticalTexts = document.querySelectorAll('.vertical-text');
+  const intro = document.getElementById('intro-lightbox');
+  const mainContent = document.getElementById('main-content');
+
+  // 文字逐個淡入
+  verticalTexts.forEach((el, i) => {
+    setTimeout(()=> el.classList.add('show'), i*350);
+  });
+
+  // 停留 + 淡出燈箱，主頁淡入
+  setTimeout(() => {
+    intro.style.transition = 'opacity 1s ease';
+    intro.style.opacity = 0;
+    setTimeout(()=> {
+      intro.style.display = 'none';
+      mainContent.style.opacity = 1;
+    }, 1000);
+  }, verticalTexts.length*350 + 1200);
+});
+</script>
+
+</body>
     
 <header>
   <img src="image/logo.png" alt="Logo" class="logo" loading="lazy">
