@@ -276,6 +276,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /* 📜 Life-story 區塊設定 */
 //* 📜 Life Story 區塊樣式 */
+#/* 📜 Life Story 區塊 */
 #life-story {
   font-family: 'Iansui', 'Noto Serif TC', serif;
   font-size: clamp(18px, 2vw, 22px); /* 根據設備自動縮放字體 */
@@ -283,62 +284,47 @@ document.addEventListener("DOMContentLoaded", () => {
   letter-spacing: 0.04em;
   color: #2e2e2e;
   text-align: center;
-  white-space: nowrap; /* ❗ 不換行 */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: block;
+  white-space: pre-line; /* ✅ 保留 <br> 並允許換行 */
   margin: 0 auto;
   width: 95%;
-  max-width: 900%;
-  white-space: pre-line; /* 保留 <br> */
+  max-width: 900px;
   transform-origin: center center;
-   
 }
-
-/* 讓內容在不同設備自動縮放以適應畫面寬度 */
-@media (max-width: 900px) {
-  #life-story { font-size: clamp(14px, 2.4vw, 18px); }
-}
-@media (max-width: 600px) {
-  #life-story { font-size: clamp(13px, 2.8vw, 16px); }
-}
-
-/* 段落之間保留空間感 */
 
 /* 段落設定 */
 #life-story p {
   display: block;
-  white-space: pre-line;         /* 保留 <br> */
-  margin: 1em 0;               /* 段落間距 */
-  font-size: clamp(16px, 2vw, 22px); /* 字體隨設備縮放 */
-  line-height: 1.6;              /* 行距 */
+  white-space: pre-line;
+  margin: 1em 0; /* 預設段落間距 */
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.6;
   width: 100%;
-  word-break: break-word;        /* 長字自動換行 */
-  text-align: center;            /* 置中 */
+  word-break: break-word;
+  text-align: center;
 }
-        
+
 /* ✨ 差異化段落間距 */
-#life-story p:first-child { margin-bottom: 1.2em; }     /* 標題後空一點 */
-#life-story p:nth-child(2) { margin-bottom: 1.8em; }   /* 生平與追思後空多一點 */
-#life-story p:nth-child(3) { margin-bottom: 0.8em; }   /* 告別式資訊前緊密些 */
-#life-story p:nth-child(4) { margin-bottom: 1.6em; }   /* 敬邀語後留空 */
-#life-story p:nth-child(5) { margin-bottom: 2em; }     /* 感謝語後再空一段 */
+#life-story p:first-child { margin-bottom: 1.2em; }
+#life-story p:nth-child(2) { margin-bottom: 1.8em; }
+#life-story p:nth-child(3) { margin-bottom: 0.8em; }
+#life-story p:nth-child(4) { margin-bottom: 1.6em; }
+#life-story p:nth-child(5) { margin-bottom: 2em; }
 #life-story p:nth-child(6),
-#life-story p:nth-child(7) { margin: 0.4em 0; }  
-        
-/* 段首縮排 */
+#life-story p:nth-child(7) { margin: 0.4em 0; }
+
+/* 內容強調（粗體段落） */
 #life-story p strong {
   display: block;
-  text-indent: 0;                /* 置中就不縮排 */
+  text-indent: 0;
+}
 
-/* 不同裝置自動調整 */
+/* 響應式調整 */
 @media (max-width: 768px) {
   #life-story {
     font-size: clamp(15px, 2.8vw, 20px);
     line-height: 1.55;
   }
 }
-
 @media (max-width: 480px) {
   #life-story {
     font-size: clamp(14px, 3.5vw, 18px);
