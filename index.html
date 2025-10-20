@@ -121,28 +121,111 @@ document.addEventListener('DOMContentLoaded', function () {
     <div id="life-story">
       <p class="fade-in-text" style="--delay:0s;"><strong>我們摯愛的親人 邱佳明先生</strong></p>
 
-      <p class="fade-in-text" style="--delay:0.3s;"><strong>於民國114年10月16日<br>
-         走完49年的人生旅程，<br>
-         留下我們永恆的追思與感恩。</strong></p>
+      <p class="fade-in-text" style="--delay:0.3s;">
+        於民國114年10月16日<br>
+        走完49年的人生旅程，<br>
+        留下我們永恆的追思與感恩。
+      </p>
 
-      <p class="fade-in-text" style="--delay:0.6s;"><strong>謹擇於<br>
-         民國114年10月28日（星期二）<br>
-         板橋殯儀館［ 安詳廳 ］<br>
-         舉辦告別追思奠禮</strong></p>
+      <p class="fade-in-text" style="--delay:0.6s;">
+        謹擇於<br>
+        民國114年10月28日（星期二）<br>
+        板橋殯儀館［ 安詳廳 ］<br>
+        舉辦告別追思奠禮
+      </p>
 
-      <p class="fade-in-text" style="--delay:0.9s;"><strong>敬邀至親好友蒞臨獻上哀思<br>
-         並向您獻上最深的敬意。</strong></p>
+      <p class="fade-in-text" style="--delay:0.9s;">
+        敬邀至親好友蒞臨獻上哀思<br>
+        並向您獻上最深的敬意。
+      </p>
 
-      <p class="fade-in-text" style="--delay:1.2s;"><strong>感謝您的關懷與陪伴<br>
-         家人們銘記在心，衷心感謝。</strong></p>
+      <p class="fade-in-text" style="--delay:1.2s;">
+        感謝您的關懷與陪伴<br>
+        家人們銘記在心，衷心感謝。
+      </p>
 
-      <p class="fade-in-text" style="--delay:1.5s;"><strong>豎靈地點：板橋龍華會館<br>
-         地址：新北市板橋區長江路一段7號</strong></p>
+      <p class="fade-in-text" style="--delay:1.5s;">
+        <strong>豎靈地點：</strong>板橋龍華會館<br>
+        地址：新北市板橋區長江路一段7號
+      </p>
 
-      <p class="fade-in-text" style="--delay:1.8s;"><strong>出殯地點：新北市板橋殯儀館<br>
-         地址：新北市板橋區中正路560號</strong></p>
+      <p class="fade-in-text" style="--delay:1.8s;">
+        <strong>出殯地點：</strong>新北市板橋殯儀館<br>
+        地址：新北市板橋區中正路560號
+      </p>
     </div>
   </section>
+</main>
+
+<style>
+/* 🕊️ Life Story 區塊 */
+#life-story {
+  font-family: 'Iansui', 'Noto Serif TC', serif;
+  font-size: clamp(18px, 2vw, 22px);
+  line-height: 1.8;
+  letter-spacing: 0.04em;
+  color: #2e2e2e;
+  text-align: center;
+  white-space: pre-line; /* ✅ 保留 <br> 並允許換行 */
+  margin: 2em auto;
+  width: 95%;
+  max-width: 800px;
+  transform-origin: center center;
+}
+
+/* 段落設定 */
+#life-story p {
+  margin: 1.2em 0;
+  display: block;
+  font-size: clamp(16px, 2vw, 22px);
+  line-height: 1.7;
+  text-align: center;
+  white-space: pre-line;
+  word-break: keep-all;
+}
+
+/* ✨ 差異化段落間距 */
+#life-story p:first-child { margin-bottom: 1.4em; }
+#life-story p:nth-child(2) { margin-bottom: 1.8em; }
+#life-story p:nth-child(3) { margin-bottom: 1.4em; }
+#life-story p:nth-child(4) { margin-bottom: 1.6em; }
+#life-story p:nth-child(5) { margin-bottom: 2em; }
+#life-story p:nth-child(6),
+#life-story p:nth-child(7) { margin: 0.8em 0; }
+
+/* 內容強調（粗體段落） */
+#life-story strong {
+  font-weight: 600;
+  color: #1f1f1f;
+  display: inline;
+}
+
+/* 響應式調整 */
+@media (max-width: 768px) {
+  #life-story {
+    font-size: clamp(15px, 2.6vw, 20px);
+    line-height: 1.75;
+  }
+}
+@media (max-width: 480px) {
+  #life-story {
+    font-size: clamp(14px, 3.4vw, 18px);
+    line-height: 1.8;
+    margin-top: 1.2em;
+  }
+}
+
+/* ✨ 淡入效果 */
+.fade-in-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.9s ease-out, transform 0.9s ease-out;
+}
+.fade-in-text.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
 
  <!-- 訃告紙本區 -->
 <section class="paper-obituary-section">
@@ -274,76 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
   object-fit: cover;
 }
 
-/* 📜 Life-story 區塊設定 */
-//* 📜 Life Story 區塊樣式 */
-#/* 📜 Life Story 區塊 */
-#life-story {
-  font-family: 'Iansui', 'Noto Serif TC', serif;
-  font-size: clamp(18px, 2vw, 22px); /* 根據設備自動縮放字體 */
-  line-height: 1.7;
-  letter-spacing: 0.04em;
-  color: #2e2e2e;
-  text-align: center;
-  white-space: pre-line; /* ✅ 保留 <br> 並允許換行 */
-  margin: 0 auto;
-  width: 95%;
-  max-width: 900px;
-  transform-origin: center center;
-}
 
-/* 段落設定 */
-#life-story p {
-  display: block;
-  white-space: pre-line;
-  margin: 1em 0; /* 預設段落間距 */
-  font-size: clamp(16px, 2vw, 22px);
-  line-height: 1.6;
-  width: 100%;
-  word-break: break-word;
-  text-align: center;
-}
-
-/* ✨ 差異化段落間距 */
-#life-story p:first-child { margin-bottom: 1.2em; }
-#life-story p:nth-child(2) { margin-bottom: 1.8em; }
-#life-story p:nth-child(3) { margin-bottom: 0.8em; }
-#life-story p:nth-child(4) { margin-bottom: 1.6em; }
-#life-story p:nth-child(5) { margin-bottom: 2em; }
-#life-story p:nth-child(6),
-#life-story p:nth-child(7) { margin: 0.4em 0; }
-
-/* 內容強調（粗體段落） */
-#life-story p strong {
-  display: block;
-  text-indent: 0;
-}
-
-/* 響應式調整 */
-@media (max-width: 768px) {
-  #life-story {
-    font-size: clamp(15px, 2.8vw, 20px);
-    line-height: 1.55;
-  }
-}
-@media (max-width: 480px) {
-  #life-story {
-    font-size: clamp(14px, 3.5vw, 18px);
-    line-height: 1.8;
-    margin-top: 1.6em;
-  }
-}
-
-/* ✨ 淡入效果 */
-.fade-in-text {
-  font-family: 'Iansui', 'Noto Serif TC', serif;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-}
-.fade-in-text.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
 * 燈箱 */
 #zoom-container {
   position: fixed;
