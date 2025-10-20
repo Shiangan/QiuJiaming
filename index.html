@@ -162,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
 #life-story {
   font-family: 'Iansui', 'Noto Serif TC', serif;
   font-size: clamp(18px, 2vw, 22px);
-  line-height: 1.8;
+  line-height: 1.75;
   letter-spacing: 0.04em;
   color: #2e2e2e;
   text-align: center;
@@ -175,23 +175,23 @@ document.addEventListener('DOMContentLoaded', function () {
 
 /* 段落設定 */
 #life-story p {
-  margin: 1.2em 0;
+  margin: 0.8em 0;
   display: block;
   font-size: clamp(16px, 2vw, 22px);
-  line-height: 1.7;
+  line-height: 1.65;
   text-align: center;
   white-space: pre-line;
   word-break: keep-all;
 }
 
 /* ✨ 差異化段落間距 */
-#life-story p:first-child { margin-bottom: 1.4em; }
-#life-story p:nth-child(2) { margin-bottom: 1.8em; }
-#life-story p:nth-child(3) { margin-bottom: 1.4em; }
-#life-story p:nth-child(4) { margin-bottom: 1.6em; }
-#life-story p:nth-child(5) { margin-bottom: 2em; }
+#life-story p:first-child { margin-bottom: 1em; }
+#life-story p:nth-child(2) { margin-bottom: 1.4em; }
+#life-story p:nth-child(3) { margin-bottom: 1em; }
+#life-story p:nth-child(4) { margin-bottom: 1.2em; }
+#life-story p:nth-child(5) { margin-bottom: 1.6em; }
 #life-story p:nth-child(6),
-#life-story p:nth-child(7) { margin: 0.8em 0; }
+#life-story p:nth-child(7) { margin: 0.4em 0; }
 
 /* 內容強調（粗體段落） */
 #life-story strong {
@@ -204,13 +204,13 @@ document.addEventListener('DOMContentLoaded', function () {
 @media (max-width: 768px) {
   #life-story {
     font-size: clamp(15px, 2.6vw, 20px);
-    line-height: 1.75;
+    line-height: 1.7;
   }
 }
 @media (max-width: 480px) {
   #life-story {
     font-size: clamp(14px, 3.4vw, 18px);
-    line-height: 1.8;
+    line-height: 1.75;
     margin-top: 1.2em;
   }
 }
@@ -218,7 +218,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* ✨ 淡入效果 */
 .fade-in-text {
   opacity: 0;
-  transform: translateY(20px);
+  transform: translateY(18px);
   transition: opacity 0.9s ease-out, transform 0.9s ease-out;
 }
 .fade-in-text.visible {
